@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_state_management/app_provider.dart';
+import 'package:provider/provider.dart';
+
+import 'home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (BuildContext context) => AppProvider(),
+      child: const MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,27 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter State Management Demo',
+      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.teal
+        primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const MyHomePage(),
     );
-  }
-}
-
-class Contact {
-  final String name;
-
-  const Contact({required this.name});
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
