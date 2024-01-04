@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'app_provider.dart';
 
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -22,7 +21,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:',),
+            const Text(
+              'You have pushed the button this many times:',
+            ),
             Consumer<AppProvider>(
               builder: (context, provider, child) => Text(
                 '${provider.counter}',
@@ -36,12 +37,14 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FloatingActionButton(
-            onPressed: Provider.of<AppProvider>(context, listen: false).decrementCounter,
+            // onPressed: Provider.of<AppProvider>(context, listen: false).decrementCounter,
+            onPressed: context.watch<AppProvider>().decrementCounter,
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
           FloatingActionButton(
-            onPressed: Provider.of<AppProvider>(context, listen: false).incrementCounter,
+            // onPressed: Provider.of<AppProvider>(context, listen: false).incrementCounter,
+            onPressed: context.read<AppProvider>().incrementCounter,
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),
