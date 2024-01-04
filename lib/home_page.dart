@@ -1,55 +1,37 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'app_provider.dart';
+final counterStateProvider = StateProvider((ref) {
+  return 0;
+});
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var value = ref.watch(counterStateProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Consumer<AppProvider>(
-              builder: (context, provider, child) => Text(
-                '${provider.counter}',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
-          ],
+        child: Text(
+          value.toString(),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FloatingActionButton(
-            // onPressed: Provider.of<AppProvider>(context, listen: false).decrementCounter,
-            onPressed: context.watch<AppProvider>().decrementCounter,
-            tooltip: 'Decrement',
-            child: const Icon(Icons.remove),
+            onPressed: () => ref.read(counterStateProvider.notifier).state--,
+            child: const Icon(Icons.minimize),
           ),
           FloatingActionButton(
-            // onPressed: Provider.of<AppProvider>(context, listen: false).incrementCounter,
-            onPressed: context.read<AppProvider>().incrementCounter,
-            tooltip: 'Increment',
+            onPressed: () => ref.read(counterStateProvider.notifier).state++,
             child: const Icon(Icons.add),
           ),
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
