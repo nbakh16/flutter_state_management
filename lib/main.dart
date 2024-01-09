@@ -1,26 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_state_management/pages/home_page.dart';
+import 'package:flutter_state_management/pages/login_page.dart';
+import 'package:flutter_state_management/pages/profile_page.dart';
+import 'package:flutter_state_management/pages/settings_display_page.dart';
+import 'package:flutter_state_management/pages/settings_page.dart';
+import 'package:go_router/go_router.dart';
 
-import 'home_page.dart';
+import 'data/data.dart';
 
 void main() {
-  runApp(const ProviderScope(
-    child: MyApp(),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'go_router demo',
+      routerConfig: _router,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
     );
   }
+
+  final _router = GoRouter(
+    initialLocation: '/',
+    debugLogDiagnostics: true,
+    redirect: (context, state) {
+      if (!isLoggedIn) {
+        return '/login';
+      }
+      return null;
+    },
+    routes: [
+      GoRoute(
+        path: '/',
+        name: HomePage.routeName,
+        builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        path: '/settings',
+        name: SettingsPage.routeName,
+        builder: (context, state) => const SettingsPage(),
+        routes: [
+          GoRoute(
+            path: 'display_settings',
+            name: SettingsDisplayPage.routeName,
+            builder: (context, state) => const SettingsDisplayPage(),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/profile/:name',
+        name: ProfilePage.routeName,
+        builder: (context, state) {
+          final String name = state.pathParameters['name']!;
+          return ProfilePage(name: name);
+        },
+      ),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginPage(),
+      ),
+    ],
+  );
 }
