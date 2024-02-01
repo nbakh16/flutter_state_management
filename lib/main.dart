@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_state_management/view_types/3_home_page_stateful_consumer.dart';
-import 'package:flutter_state_management/view_types/2_home_page_stateless.dart';
-import 'view_types/1_home_page.dart';
+import 'package:flutter_state_management/02_view_stateProvider/1_home_page_stateProvider.dart';
+import '01_view_provider/1_home_page.dart';
+import '01_view_provider/2_home_page_stateless.dart';
+import '01_view_provider/3_home_page_stateful_consumer.dart';
 
 ///Types of Provides
 //Provider, read-only widget
 final nameProvider = Provider<String>((ref) => 'String');
+//StateProvider
+final nameStateProvider = StateProvider<String?>((ref) => null);
 
 //
 //
@@ -26,9 +29,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter Demo',
-      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      // home: HomePage(),
       // home: HomePageStateless(),
       // home: HomePageStateful(),
+      home: HomePageStateProvider(),
     );
   }
 }
