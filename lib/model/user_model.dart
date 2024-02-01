@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class User {
@@ -59,4 +60,14 @@ class UserNotifier extends StateNotifier<User> {
   }
 
   void updateName(String value) => state = state.copyWith(name: value);
+}
+
+//changeNotifier
+class UserNotifierChange extends ChangeNotifier {
+  User user = const User(name: '', age: 0);
+
+  void updateName(String value) {
+    user = user.copyWith(name: value);
+    notifyListeners();
+  }
 }

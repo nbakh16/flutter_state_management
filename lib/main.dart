@@ -16,6 +16,11 @@ final nameStateProvider = StateProvider<String?>((ref) => null);
 final userProvider = StateNotifierProvider<UserNotifier, User>(
   (ref) => UserNotifier(),
 );
+//ChangeNotifier and ChangeNotifierProvider **NOT recommended to user, according to docs
+//Only provider which is ***mutable
+final userChangeNotifier = ChangeNotifierProvider(
+  (ref) => UserNotifierChange(),
+);
 
 //
 //
