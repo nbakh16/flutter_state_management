@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_management/02_view_stateProvider/1_home_page_stateProvider.dart';
 import 'package:flutter_state_management/03_view_stateNotifier/1_home_page_stateNotifier.dart';
+import 'package:flutter_state_management/04_view_futureProvider/1_home_page_futureProvider.dart';
 import 'package:flutter_state_management/model/user_model.dart';
 import '01_view_provider/1_home_page.dart';
 import '01_view_provider/2_home_page_stateless.dart';
@@ -21,6 +22,7 @@ final userProvider = StateNotifierProvider<UserNotifier, User>(
 final userChangeNotifier = ChangeNotifierProvider(
   (ref) => UserNotifierChange(),
 );
+//Future Provider, based on http calls
 
 //
 //
@@ -45,7 +47,8 @@ class MyApp extends StatelessWidget {
       // home: HomePageStateless(),
       // home: HomePageStateful(),
       // home: HomePageStateProvider(),
-      home: HomePageStateNotifier(),
+      // home: HomePageStateNotifier(),
+      home: HomePageFutureProvider(),
     );
   }
 }
