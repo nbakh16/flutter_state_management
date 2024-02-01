@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_management/02_view_stateProvider/1_home_page_stateProvider.dart';
+import 'package:flutter_state_management/03_view_stateNotifier/1_home_page_stateNotifier.dart';
+import 'package:flutter_state_management/model/user_model.dart';
 import '01_view_provider/1_home_page.dart';
 import '01_view_provider/2_home_page_stateless.dart';
 import '01_view_provider/3_home_page_stateful_consumer.dart';
@@ -10,6 +12,10 @@ import '01_view_provider/3_home_page_stateful_consumer.dart';
 final nameProvider = Provider<String>((ref) => 'String');
 //StateProvider
 final nameStateProvider = StateProvider<String?>((ref) => null);
+//StateNotifier and StateNotifierProvider
+final userProvider = StateNotifierProvider<UserNotifier, User>(
+  (ref) => UserNotifier(),
+);
 
 //
 //
@@ -33,7 +39,8 @@ class MyApp extends StatelessWidget {
       // home: HomePage(),
       // home: HomePageStateless(),
       // home: HomePageStateful(),
-      home: HomePageStateProvider(),
+      // home: HomePageStateProvider(),
+      home: HomePageStateNotifier(),
     );
   }
 }
