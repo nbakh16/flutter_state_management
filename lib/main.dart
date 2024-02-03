@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_management/02_view_stateProvider/1_home_page_stateProvider.dart';
 import 'package:flutter_state_management/03_view_stateNotifier/1_home_page_stateNotifier.dart';
 import 'package:flutter_state_management/04_view_futureProvider/1_home_page_futureProvider.dart';
+import 'package:flutter_state_management/logger/logger_riverpod.dart';
 import 'package:flutter_state_management/model/user_model.dart';
 import 'package:flutter_state_management/repository/user_repo.dart';
 import '01_view_provider/1_home_page.dart';
@@ -40,8 +41,9 @@ final userStreamProvider = StreamProvider((ref) async* {
 //
 void main() {
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    ProviderScope(
+      observers: [LoggerRiverpod()], //track providers on console
+      child: const MyApp(),
     ),
   );
 }
