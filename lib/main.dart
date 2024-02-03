@@ -8,6 +8,7 @@ import 'package:flutter_state_management/repository/user_repo.dart';
 import '01_view_provider/1_home_page.dart';
 import '01_view_provider/2_home_page_stateless.dart';
 import '01_view_provider/3_home_page_stateful_consumer.dart';
+import '05_view_streamProvider/1_home_page_streamProvider.dart';
 
 ///Types of Provides
 //Provider, read-only widget
@@ -27,6 +28,13 @@ final userChangeNotifier = ChangeNotifierProvider(
 final fetchUserProvider = FutureProvider((ref) {
   final userRepository = ref.watch(userRepoProvider);
   return userRepository.getUserData();
+});
+//Stream Provider
+final userStreamProvider = StreamProvider((ref) async* {
+  for (int i = 0; i <= 10; i++) {
+    await Future.delayed(const Duration(seconds: 1));
+    yield i;
+  }
 });
 //
 //
@@ -52,7 +60,8 @@ class MyApp extends StatelessWidget {
       // home: HomePageStateful(),
       // home: HomePageStateProvider(),
       // home: HomePageStateNotifier(),
-      home: HomePageFutureProvider(),
+      // home: HomePageFutureProvider(),
+      home: HomePageSteamProvider(),
     );
   }
 }
