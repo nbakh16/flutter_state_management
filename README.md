@@ -1,11 +1,6 @@
-# Riverpod 2
+# Bloc
 
-[flutter_riverpod](https://pub.dev/packages/flutter_riverpod)
-
-[riverpod](https://pub.dev/packages/riverpod)
-
-[hooks_riverpod](https://pub.dev/packages/hooks_riverpod)
+[flutter_bloc](https://pub.dev/packages/flutter_bloc)
 
 
-
-https://youtu.be/pwflXIA-6YQ?si=YWgbaqCkO-vrxKcG
+https://youtu.be/THCkkQ-V1-8?si=iV2y0pF3f5HfcCOB
