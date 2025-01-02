@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_state_management/cubit/counter_cubit.dart';
+import 'package:flutter_state_management/logic/cubit/counter_cubit.dart';
 
-class CounterPage extends StatelessWidget {
-  const CounterPage({super.key});
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Counter')),
+      appBar: AppBar(title: const Text('Second Counter')),
+      backgroundColor: Colors.tealAccent,
       body: Center(
-        //BlocConsumer is combination of both BlocBuilder and BlocListener
+        //BlocConsumer = BlocBuilder and BlocListener
         child: BlocConsumer<CounterCubit, CounterState>(
           listener: (context, state) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -38,12 +39,14 @@ class CounterPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            heroTag: null,
             onPressed: () {
               context.read<CounterCubit>().decrement();
             },
             child: const Icon(Icons.remove),
           ),
           FloatingActionButton(
+            heroTag: null,
             onPressed: () {
               context.read<CounterCubit>().increment();
             },
