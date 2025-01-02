@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_state_management/logic/cubit/counter_cubit.dart';
-import 'package:flutter_state_management/presentation/screens/second_screen.dart';
 
 class CounterScreen extends StatelessWidget {
   const CounterScreen({super.key});
@@ -59,15 +58,7 @@ class CounterScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider.value(
-                    //this provider is optional on version 8
-                    value: BlocProvider.of<CounterCubit>(context),
-                    child: const SecondScreen(),
-                  ),
-                ),
-              );
+              Navigator.of(context).pushNamed('/second');
             },
             child: const Text('Second Page'),
           ),
