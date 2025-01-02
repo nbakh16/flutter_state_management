@@ -10,7 +10,19 @@ class CounterPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Counter')),
       body: Center(
-        child: BlocBuilder<CounterCubit, CounterState>(
+        //BlocConsumer is combination of both BlocBuilder and BlocListener
+        child: BlocConsumer<CounterCubit, CounterState>(
+          listener: (context, state) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content:
+                    Text(state.wasIncremented ? 'Incremented' : 'Decremented'),
+                backgroundColor:
+                    state.wasIncremented ? Colors.green : Colors.redAccent,
+                duration: const Duration(milliseconds: 300),
+              ),
+            );
+          },
           builder: (context, state) {
             return Text(
               state.counterValue.toString(),
