@@ -1,21 +1,30 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_state_management/logic/cubit/internet_cubit.dart';
 import 'package:flutter_state_management/presentation/router/app_router.dart';
-import 'package:flutter_state_management/presentation/screens/second_screen.dart';
 import 'logic/cubit/counter_cubit.dart';
-import 'presentation/screens/counter_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp(connectivity: Connectivity()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Connectivity connectivity;
+  const MyApp({super.key, required this.connectivity});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterCubit>(
-      create: (context) => CounterCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => InternetCubit(connectivity: connectivity),
+        ),
+        BlocProvider(
+          create: (context) =>
+              CounterCubit(internetCubit: context.read<InternetCubit>()),
+        ),
+      ],
       child: MaterialApp(
         title: 'Bloc',
         // routes: {
